@@ -52,6 +52,14 @@ The project has been consolidated into a unified Next.js workspace:
 └── supabase_setup.sql    # Database schema for Supabase
 ```
 
+## 📝 Content Management (For Non-Technical Updates)
+
+If you need to tweak the marketing copy, you can do so directly without breaking the application logic:
+- **Landing Page Text (Hero, Features, Pricing):** Edit `app/page.tsx`. Search for the text you want to replace.
+- **Success Messages:** Edit the `message` fields in `app/actions/waitlist.ts`.
+- **Email Content:** Edit the HTML returned by `getWaitlistEmailHtml()` in `lib/email-templates.ts`.
+- **Base Waitlist Count (Social Proof):** Edit `const WAITLIST_BASE_COUNT = 240;` at the top of `app/page.tsx` to manually change the starting number.
+
 ## 🚦 Getting Started
 
 ### 1. Database Setup
