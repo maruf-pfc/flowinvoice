@@ -73,6 +73,14 @@ export default function WaitlistForm() {
           40% off — forever.
         </p>
 
+        {/* Development Notification Note */}
+        <div className="mt-6 mx-auto max-w-md p-4 bg-primary/5 border border-primary/20 rounded-lg text-left">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            <span className="font-semibold text-primary">Note for testers:</span> If you didn't receive a confirmation email, it is because this project uses Resend's free tier. 
+            Resend <a href="https://resend.com/docs/dashboard/emails/sandbox" target="_blank" rel="noreferrer" className="underline hover:text-primary">sandbox domains</a> only allow sending emails to your verified Resend account email address to prevent spam.
+          </p>
+        </div>
+
         <button
           className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setIsSubmitted(false)}

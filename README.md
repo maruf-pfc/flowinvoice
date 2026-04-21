@@ -16,6 +16,17 @@ FlowInvoice is a modern, high-performance invoicing and waitlist platform built 
 - **Real-time Database**: Powered by Supabase (PostgreSQL).
 - **Health Monitoring**: Built-in `/api/health` route for system status.
 
+### ✉️ Email Confirmations
+
+FlowInvoice automatically dispatches gracefully styled HTML welcome emails to users upon waitlist registration.
+
+![Email Confirmation Demo](public/email.png)
+
+> **⚠️ Note on Resend Sandbox Limitations:** 
+> This repository is currently set up using Resend's free tier. Be aware that Resend sandbox domains **only allow you to send emails to the exact email address verified on your own Resend account**. If you test the waitlist form with any other arbitrary email address, the API will accept the request but silently drop the email delivery to prevent spam abuse. 
+> 
+> To send confirmation emails to real users in a production environment, you must [verify a custom domain](https://resend.com/domains) in your Resend dashboard and update the `CONFIRMATION_EMAIL_FROM` environment variable.
+
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 15+ (App Router)](https://nextjs.org)
