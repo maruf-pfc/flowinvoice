@@ -1,0 +1,3 @@
+# Test runner configuration
+[test]
+timeout = 10000
