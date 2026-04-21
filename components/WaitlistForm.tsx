@@ -73,13 +73,12 @@ export default function WaitlistForm() {
           40% off — forever.
         </p>
 
-        <Button
-          variant="ghost"
-          className="mt-6"
+        <button
+          className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           onClick={() => setIsSubmitted(false)}
         >
           Submit another email
-        </Button>
+        </button>
       </div>
     );
   }
@@ -90,7 +89,7 @@ export default function WaitlistForm() {
       className="space-y-5"
     >
       {/* Name */}
-      <div className="space-y-2">
+      <div className="space-y-2 text-left">
         <Label htmlFor="name" className="text-sm text-muted-foreground">
           Full name
         </Label>
@@ -109,7 +108,7 @@ export default function WaitlistForm() {
       </div>
 
       {/* Email */}
-      <div className="space-y-2">
+      <div className="space-y-2 text-left">
         <Label htmlFor="email" className="text-sm text-muted-foreground">
           Email address
         </Label>

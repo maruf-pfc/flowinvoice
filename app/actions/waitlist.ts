@@ -3,6 +3,7 @@
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { resend } from '@/lib/email';
+import { getWaitlistEmailHtml } from '@/lib/email-templates';
 import { revalidatePath } from 'next/cache';
 
 const waitlistSchema = z.object({
@@ -14,7 +15,6 @@ export async function joinWaitlist(formData: FormData) {
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
 
-  // 1. Validate
   const validatedFields = waitlistSchema.safeParse({ name, email });
 
   if (!validatedFields.success) {
@@ -60,12 +60,7 @@ export async function joinWaitlist(formData: FormData) {
         from: process.env['CONFIRMATION_EMAIL_FROM'] || 'waitlist@flowinvoice.com',
         to: email,
         subject: 'You are on the list! 🎉 - FlowInvoice',
-        html: `
-          <h1>Welcome to FlowInvoice, ${name}!</h1>
-          <p>Thanks for joining our waitlist. We are excited to have you with us.</p>
-          <p>We'll notify you as soon as we're ready for beta users (and remember, you get 40% off forever!)</p>
-          <p>Best,<br/>The FlowInvoice Team</p>
-        `,
+        html: getWaitlistEmailHtml(name),
       });
     }
   } catch (emailError) {
