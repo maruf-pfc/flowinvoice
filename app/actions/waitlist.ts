@@ -56,15 +56,19 @@ export async function joinWaitlist(formData: FormData) {
   // 4. Send Confirmation Email
   try {
     if (process.env['RESEND_API_KEY']) {
-      await resend.emails.send({
+      const { data, error: sendError } = await resend.emails.send({
         from: process.env['CONFIRMATION_EMAIL_FROM'] || 'FlowInvoice <onboarding@resend.dev>',
         to: email,
         subject: 'You are on the list! 🎉 - FlowInvoice',
         html: getWaitlistEmailHtml(name),
       });
+      
+      if (sendError) {
+        console.error('Resend API Error:', sendError);
+      }
     }
   } catch (emailError) {
-    console.error('Email Error:', emailError);
+    console.error('Email Exception:', emailError);
     // We don't fail the whole action if email fails
   }
 
