@@ -73,16 +73,16 @@ export const getWaitlistEmailHtml = (name: string) => `
   </style>
 </head>
 <body>
-  <div className="wrapper">
-    <div className="container">
-      <div className="header">
-        <div className="logo">FLOWINVOICE</div>
+  <div class="wrapper">
+    <div class="container">
+      <div class="header">
+        <div class="logo">FLOWINVOICE</div>
       </div>
-      <div className="content">
+      <div class="content">
         <h1>You're on the list, ${name}!</h1>
         <p>Thanks for joining the FlowInvoice waitlist. We're building the billing engine for the next generation of independent talent, and we're thrilled to have you with us.</p>
         
-        <div className="highlight">
+        <div class="highlight">
           <strong>Early Adopter Status: Confirmed</strong><br/>
           As an early member of our community, you have locked in a <strong>40% lifetime discount</strong> on all future FlowInvoice plans.
         </div>
@@ -91,12 +91,13 @@ export const getWaitlistEmailHtml = (name: string) => `
         
         <p>Best,<br><strong>The FlowInvoice Team</strong></p>
       </div>
-      <div className="footer">
+      <div class="footer">
         © 2026 FlowInvoice. Modern billing for modern teams.<br>
         If you didn't sign up for this, please ignore this email.
       </div>
     </div>
   </div>
 </body>
+
 </html>
 `;

@@ -57,7 +57,7 @@ export async function joinWaitlist(formData: FormData) {
   try {
     if (process.env['RESEND_API_KEY']) {
       await resend.emails.send({
-        from: process.env['CONFIRMATION_EMAIL_FROM'] || 'waitlist@flowinvoice.com',
+        from: process.env['CONFIRMATION_EMAIL_FROM'] || 'FlowInvoice <onboarding@resend.dev>',
         to: email,
         subject: 'You are on the list! 🎉 - FlowInvoice',
         html: getWaitlistEmailHtml(name),
