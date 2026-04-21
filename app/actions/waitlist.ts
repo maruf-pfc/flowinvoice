@@ -75,6 +75,6 @@ export async function joinWaitlist(formData: FormData) {
   revalidatePath('/');
   return {
     success: true,
-    message: 'Welcome to the waitlist! Check your inbox soon. 🎉',
+    message: 'Welcome to the waitlist! Check your inbox soon.',
   };
 }
