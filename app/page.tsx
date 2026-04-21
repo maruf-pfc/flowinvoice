@@ -5,12 +5,20 @@ import {
   Layers,
   CreditCard,
   Globe,
-  AlertCircle
+  AlertCircle,
+  Star
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import WaitlistForm from '@/components/WaitlistForm';
+import { createClient } from '@/lib/supabase/server';
 
-export default function LandingPage() {
+const WAITLIST_BASE_COUNT = 240;
+
+export default async function LandingPage() {
+  const supabase = await createClient();
+  const { count } = await supabase.from('waitlist').select('*', { count: 'exact', head: true });
+  const totalWaitlist = WAITLIST_BASE_COUNT + (count || 0);
+
   return (
     <div className="flex flex-col min-h-screen bg-background font-sans antialiased selection:bg-primary selection:text-primary-foreground">
       <header className="fixed top-0 w-full z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
@@ -52,7 +60,17 @@ export default function LandingPage() {
             
             <div className="max-w-md mx-auto p-8 rounded-3xl border border-border bg-card/10 backdrop-blur-sm shadow-2xl shadow-primary/5 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
               <div className="mb-6 text-left">
-                <h3 className="text-sm font-bold mb-1">Join the Waitlist — It&apos;s Free</h3>
+                <h3 className="text-sm font-bold mb-2">Join the Waitlist — It&apos;s Free</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-6 h-6 rounded-full bg-zinc-200 dark:bg-zinc-800 border-2 border-background flex items-center justify-center overflow-hidden">
+                        <div className="w-full h-full bg-primary/20 backdrop-blur-sm"></div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-[12px] font-medium text-muted-foreground">Join <span className="text-foreground font-bold">{totalWaitlist}+</span> freelancers already waiting.</p>
+                </div>
                 <p className="text-[11px] text-muted-foreground">No credit card required. Secure your lifetime discount today.</p>
               </div>
               <WaitlistForm />
@@ -166,6 +184,11 @@ export default function LandingPage() {
                 }
               ].map((t, i) => (
                 <div key={i} className="p-8 rounded-3xl border border-border/50 bg-background flex flex-col justify-between">
+                  <div className="mb-5 flex gap-1">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className="w-[14px] h-[14px] fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
                   <p className="text-sm leading-relaxed mb-8 italic text-muted-foreground/80">&quot;{t.quote}&quot;</p>
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-widest">{t.author}</p>
@@ -213,15 +236,15 @@ export default function LandingPage() {
             <div>
               <h5 className="text-[10px] font-bold uppercase tracking-widest mb-4">Product</h5>
               <ul className="space-y-3 text-[11px] text-muted-foreground font-medium">
-                <li><Link href="#" className="hover:text-foreground">About</Link></li>
-                <li><Link href="#" className="hover:text-foreground">Contact</Link></li>
+                <li><Link href="/coming-soon" className="hover:text-foreground">About</Link></li>
+                <li><Link href="/coming-soon" className="hover:text-foreground">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h5 className="text-[10px] font-bold uppercase tracking-widest mb-4">Legal</h5>
               <ul className="space-y-3 text-[11px] text-muted-foreground font-medium">
-                <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
-                <li><Link href="#" className="hover:text-foreground">Terms of Service</Link></li>
+                <li><Link href="/coming-soon" className="hover:text-foreground">Privacy Policy</Link></li>
+                <li><Link href="/coming-soon" className="hover:text-foreground">Terms of Service</Link></li>
               </ul>
             </div>
             <div>
