@@ -4,6 +4,9 @@ FlowInvoice is a modern, high-performance invoicing and waitlist platform built 
 
 [![Stack](https://img.shields.io/badge/Stack-Next.js%20%2B%20Supabase%20%2B%20Resend-blue)](https://nextjs.org)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live-flowinvoice--jade.vercel.app-black?logo=vercel)](https://flowinvoice-jade.vercel.app)
+
+![FlowInvoice Demo](public/demo.webp)
 
 ## 🚀 Features
 
@@ -73,21 +76,65 @@ bun dev
 
 ## 🏗️ Architecture
 
+### Data Flow
+
+```
+User → WaitlistForm (Client) → Server Action → Supabase (INSERT) → Resend (Email) → Response → UI (Toast)
+```
+
 ### Server Actions
 Waitlist submissions are handled via **Next.js Server Actions** (`app/actions/waitlist.ts`). This ensures:
-- **Zero API Overload**: No need for a separate Express server.
+- **Zero API Overhead**: No need for a separate Express server.
 - **Type Safety**: End-to-end types from form to database.
 - **Security**: Logic runs exclusively on the server.
 
 ### Monitoring
 Monitor your system and database connectivity via:
-`GET /api/health`
+
+```
+GET /api/health
+```
+
+Returns JSON with status, uptime, database connectivity, and environment info.
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun dev` | Start development server with Turbopack |
+| `bun run build` | Create optimized production build |
+| `bun start` | Start production server |
+| `bun run lint` | Run ESLint |
+| `bun run format` | Format code with Prettier |
+| `bun run typecheck` | Run TypeScript type checking |
+
+## 🚢 Deployment
+
+This project is optimized for [Vercel](https://vercel.com):
+
+1. Push your repo to GitHub
+2. Import the repository in Vercel
+3. Add the environment variables listed above
+4. Deploy
+
+Server Actions are automatically deployed as serverless functions. No additional configuration required.
 
 ## 🗺️ Roadmap
 
-- [x] Initial Migration to Supabase
-- [x] Consolidated Architectue
-- [x] Waitlist System & Email Integration
-- [ ] User Authentication (Supabase Auth)
-- [ ] Invoice Generation Dashboard
-- [ ] Multi-currency Support
+- [x] Landing page with Linear/Vercel aesthetic
+- [x] Waitlist form with double validation (client + server)
+- [x] Supabase integration with RLS
+- [x] Automated confirmation emails via Resend
+- [x] Health check endpoint
+- [ ] Admin dashboard for viewing waitlist entries
+- [ ] Rate limiting with Upstash Redis
+- [ ] SEO metadata and Open Graph tags
+- [ ] Unit and integration tests
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## 👤 Author
+
+**Maruf** — [@maruf-pfc](https://github.com/maruf-pfc)
